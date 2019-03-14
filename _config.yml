@@ -1,9 +1,4 @@
-# Site settings
-title: Lorem Ipsum - Web Developer
-description: "朱学天的git博客"
-baseurl: "/space-jekyll-template" # for test: remove string '/space-jekyll-template' to ''
-url: "http://victorvoid.github.io/space-jekyll-template/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
-
+theme: jekyll-theme-cayman
 # User settings
 username: 朱学天
 user_title: 朱学天的git博客
@@ -13,7 +8,7 @@ github_username:  voidstatic888
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: /:title/
+permalink: /:year/:month/:day/:title
 
 # html minify
 compress_html:
