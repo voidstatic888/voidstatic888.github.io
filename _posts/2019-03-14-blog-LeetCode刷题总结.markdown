@@ -1,8 +1,15 @@
-# Leetcodeˢ���ܽ�
+---
+layout: default
+title:  "Leetcode刷题总结"
+date:   2019-03-14 15:22:00
+categories: main
+---
+
+# Leetcode刷题总结
 
 ## _984. String Without AAA or BBB_
 
-�����£�
+答案如下：
 ```
 class Solution(object):
     def strWithout3a3b(self, A, B):
@@ -28,8 +35,8 @@ class Solution(object):
         return res
 ```
 
-*�ܽ᣺*
-1. ˼ά̫���ޣ�ֻ�����˾������������Ե��º����������֮����ֻ�ܴ�����������������������ԣ����������ͬ
-2. �����⸴�ӻ�����û��ץס����ı���
-3. �Ҿ�������㷨�������������ж���A>B,�ô����ڼ������˶����A���ֲ�����������̫���A������ʣ���˹����B
-4. ���㷨�Ⱑ��һ����д�Ĵ��뿪ʼ��������������߱��ӷ���ˣ�˵��˼·���ˣ�������򵥵ķ���
+*总结：*
+1. 思维太局限，只考虑了具体的情况，所以导致后来情况复杂之后变得只能处理特殊情况，不具有普适性，钻进了死胡同
+2. 简单问题复杂化，并没有抓住问题的本质
+3. 我觉得这个算法的妙处妙就在妙在判断了A>B,好处在于既消耗了多余的A，又不至于消耗了太多的A以至于剩下了过多的B
+4. 做算法题啊，一旦你写的代码开始处理特殊情况或者变得臃肿了，说明思路错了，不是最简单的方法
