@@ -4,48 +4,7 @@ username: 朱学天
 user_title: 朱学天的git博客
 email: 752396754@qq.com
 github_username:  voidstatic888
-
 # Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title
-
-# html minify
-compress_html:
-  clippings: all
-  comments: all
-  endings: []
-  profile: false
-
-# Links to include in menu navigation
-links:
-  section_1:
-    - title: home
-      url: /
-      key_trigger: 1
-    - title: my posts
-      url: /posts
-      key_trigger: 2
-    - title: series
-      url: /series
-      key_trigger: 3
-    - title: tags
-      url: /tags
-      key_trigger: 4
-    - title: about me
-      url: /about
-      key_trigger: 5
-  section_2:
-    - title: github
-      url: http://www.github.com/voidstatic888
-      new_tab: true
-      key_trigger: g
-
-# projects in header index
-projects:
-  - name: blog
-    url: https://github.com/voidstatic888/blog
-
-
-# exclude my node related stuff
-exclude: ['package.json', 'src', 'node_modules']
