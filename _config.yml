@@ -1,0 +1,10 @@
+#theme: jekyll-theme-cayman
+# User settings
+username: 朱学天
+user_title: 朱学天的git博客
+email: 752396754@qq.com
+github_username:  voidstatic888
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title
