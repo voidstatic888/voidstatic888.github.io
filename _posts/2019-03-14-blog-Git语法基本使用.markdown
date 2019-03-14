@@ -1,0 +1,26 @@
+---
+layout: default
+title:  "Git语法基本使用"
+date:   2019-03-14 15:22:00
+categories: main
+---
+
+# git的基本操作实践
+- ## 什么是git？ ##
+在我的理解，git就是一个版本控制软件
+- ## git的使用 ##
+1. ### git下载地址 [git](https://git-scm.com/downloads) ###
+2. ### TortoiseGit下载地址 [TortoiseGit](https://tortoisegit.org/download/) ###
+git提供了GUI界面操作和bash命令行操作两种方式，如果你之前就已经熟悉了tortoiseSVN的操作的小伙伴可以使用tortoiseGIT，可以较快上手。
+_**TIPS：在TortoiseGIT安装的过程中，如果比较熟悉SSH方式的小伙伴，最好选择安装这个方式吧。**_
+￼￼￼￼￼
+![log](https://user-images.githubusercontent.com/26738407/51235792-5d7bb080-19ab-11e9-9f53-6ae930cd1ad1.png)
+每一个操作都会显示对应的git命令，不熟悉git命令的小伙伴可以每次操作完之后都看一下，顺便熟悉git命令。
+- ## git bash的简单使用 ##
+1.  新建一个文件夹 //git项目目录
+1. `git init` //初始化git目录
+2. `git remote add java_test https://github.com/voidstatic888/java_test.git` //添加远程git地址
+3. `git pull --rebase java_test master` //初始化拉取远程master的内容
+4. `git add .` //递归提交本目录下所有文件到暂存区
+5. `git commit -m '提交所有代码'` //提交到本地仓库
+6. `git push` //推送至远程仓库

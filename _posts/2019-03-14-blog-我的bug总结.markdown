@@ -1,0 +1,111 @@
+---
+layout: default
+title:  "我的bug总结"
+date:   2019-03-14 15:22:00
+categories: main
+---
+
+## 1. 【java api】 CompletableFuture并发线程数太少 ##
+导致原因：CompletableFuture会默认使用（当前设备cpu核心数-1）数量的线程来完成任务
+解决方法：通过CompletableFuture.supplyAsync(()->{}, executor)来解决，executor可设置自己想要设置的线程数：Executors.newFixedThreadPool(线程数)
+
+## 2. 【maven】 maven配置文件出现错误：failed to read artifact descriptor for xx.jar ##
+导致原因：本地maven仓库对应的目录jar包缺失或者文件错误
+解决方法：删掉对应文件夹，重新下载
+
+## 3. 【kafka】 java.lang.NoSuchMethodError: org.slf4j.helpers.MessageFormatter.arrayFormat ##
+导致原因：1. jar包冲突 2. slf4j-api与slf4j-log4j12两个jar包的版本不兼容
+解决办法：1. 通过maven命令 mvn dependency:tree 排查冲突的jar包      2.保持slf4j-api和slf4j-log4j12两个jar包版本一致
+
+## 4. 【kafka】 org.apache.kafka.common.errors.TimeoutException: Failed to update metadata after 60000 ms. ##
+导致原因：1.没起kafka自带的zookeeper服务 2.server.properties文件里没配置listeners
+解决办法：1. bin/zookeeper-server-start.sh config/zookeeper.properties 2. 配置listeners为本机的ip
+
+## 5. 【kafka】 ./kafka-run-class.sh kafka.tools.GetOffsetShell --topic test.message --broker-list localhost:9092 --partitions 0 ##
+报错：Exception in thread "main" kafka.common.KafkaException: fetching topic metadata for topics [Set(test.message)] from broker [ArrayBuffer(BrokerEndPoint(0,localho
+st,9092))] failed
+导致原因：config/server.properties里listeners配置的主机的ip是什么，--broker-list就配置什么
+解决方法：./kafka-run-class.sh kafka.tools.GetOffsetShell --topic test.message --broker-list 192.168.5.128:9092 --partitions 0
+
+## 6. 【python】 Cannot uninstall 'html5lib'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall. ##
+导致原因：未知
+解决方法：删除Anaconda目录下的例如D:\Anaconda\Lib\site-packages\boto-2.48.0-py3.6.egg-info的文件再重新pip install
+
+## 7. 【python】 pip install 无效 ##
+导致原因：公司上网需要代理
+解决办法：pip install grequests --proxy http://xzproxy.cnsuning.com:8080用代理
+
+## 8. 【chrome extension】加载vue框架的popup.html节点一旦加上了id='app'(Vue的el生效)就不会生效 ##
+导致原因：CSP（Content Security Policy）生效，拦截了vue框架的一些操作
+解决办法：mainfest.json配置文件加上"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"配置
+
+## 9. 【python】 pip install zbar时报错Microsoft Visual C++ 14.0 is required. ##
+导致原因：zbar库使用C语言编译的，因此需要C语言环境
+解决办法：采用python语言实现的库，pip install pyzbar
+
+## 10. 【java】 使用了守护线程，导致程序运行完退出后，守护线程所执行的内容没执行完 ##
+导致原因：所谓守护线程是指在程序运行的时候在后台提供一种通用服务的线程，比如垃圾回收线程就是一个很称职的守护者，并且这种线程并不属于程序中不可或缺的部分。
+因此，当所有的非守护线程结束时，程序也就终止了，同时会杀死进程中的所有守护线程。反过来说，只要任何非守护线程还在运行，程序就不会终止。
+解决方法：不要把线程池里的线程设置为守护线程
+
+## 11. 【mongodb】 mongodb启动不了：child process failed, exited with error number 48 ##
+导致原因：mongodb被错误得关闭了
+解决办法：先删掉data目录下的.lock文件，再执行./mongod -f /usr/local/mongodbserver/etc/mongodb.conf --repair
+
+## 12. 【linux】 ##
+开放端口号命令：firewall-cmd --permanent --zone=public --add-port=61080/tcp
+查看所有的开放端口：firewall-cmd --zone=public --list-ports
+防火墙重启：firewall-cmd --reload
+查看防火墙开启状态：firewall-cmd --state
+
+## 13. 【linux】 ##
+解决Django的错误网关：uwsgi --socket :8000 --chdir=/usr/local/webapp/django_test --module django_test.wsgi
+
+## 14. 【svn】 svn checkout的时候报错 working copy locked ##
+导致原因：未知
+解决办法：clean up一下
+
+## 15. 【maven】 ##
+手动导入jar包：mvn install:install-file -Dfile=C:\Users\sinosoft\Desktop\lib\spring-cloud-sleuth-zipkin-1.2.0.RC1.jar 
+-DgroupId=org.springframework.cloud -DartifactId=spring-cloud-sleuth-zipkin -Dversion=1.2.0.RC1 -Dpackaging=jar
+
+## 16. 【vue】 vue init webpack pro [Failed to download repo] [connect ETIMEDOUT 192.30.255.112] ##
+导致原因：各种代理上不了外网
+解决办法：在C:\Users\${用户名}\.vue-templates(不行的话就在文件夹名字后面加.)\下把手动下载的模板复制到这
+
+## 17. 【vue】 vue的npm连不上网 ##
+解决办法：npm config set proxy=http://xzproxy.cnsuning.com:8080,如果不知道https的代理，就千万不要设置https代理，否则优先用https代理
+
+## 18. 【vue】 vue项目下的src/assets下的资源无法被引用 ##
+导致原因：webpack会把src/assets目录下的资源打包合并，必须要用import或require手动导入
+解决办法：在根目录建static目录，把静态资源放在此目录
+
+## 19. 【testng】 testng的包导入不了 ##
+导致原因：testng的版本为6.13.1，怀疑版本有问题
+解决办法：testng的版本改为6.8
+
+## 20. 【jmockito】 test(any)报错：org.mockito.exceptions.misusing.InvalidUseOfMatchersException:  Misplaced argument matcher detected here ##
+导致原因：暂不知
+解决办法：test((ClassYouNeedToMock)any),需要把类型转换成参数需要的类型，另外想简单的话，建议录制的时候使用new NonStrictExpectations({})
+
+## 21. 【kafka】 offsets.topic.replication.factor，默认3,用于配置offset记录的topic的partition的副本个数，从kafka拉不到数据 ##
+导致原因：offsets.topic.replication.factor，默认3，但是只有一台机器
+解决办法：server.properties的offsets.topic.replication.factor=1
+
+## 22. 【git】 git创建本地仓库并提交 ##
+导致原因：
+解决办法：      
+		1. git init
+		2. git remote add java_test https://github.com/voidstatic888/java_test.git
+		3. git pull --rebase java_test master
+		4. git add .
+		5. git commit -m '提交所有代码'
+		6. git push
+
+## 23. 【django】 python manage.py runserver 运行完之后访问不了 ##
+导致原因：
+解决办法：python manage.py runserver 0.0.0.0:8000
+
+## 24. 【linux】 使进程运行在后台 ##
+导致原因：
+解决办法：nohup 你的command &
